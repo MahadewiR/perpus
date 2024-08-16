@@ -1,5 +1,6 @@
 <?php
-$queryUser = mysqli_query($koneksi, "SELECT * FROM user ORDER BY id DESC");
+$queryUser = mysqli_query($koneksi, "SELECT level.nama_level, user. * FROM user 
+            LEFT JOIN level ON level.id = user.id_level ORDER BY id DESC");
 // $rowUser = mysqli_fetch_assoc($queryUser);
 // die
 
@@ -29,6 +30,7 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user ORDER BY id DESC");
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Level</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Aksi</th>
@@ -39,14 +41,12 @@ $queryUser = mysqli_query($koneksi, "SELECT * FROM user ORDER BY id DESC");
                             while ($rowUser = mysqli_fetch_assoc($queryUser)) : ?>
                                 <tr>
                                     <td><?php echo $no++ ?></td>
+                                    <td><?php echo $rowUser['nama_level'] ?></td>
                                     <td><?php echo $rowUser['nama_lengkap'] ?></td>
                                     <td><?php echo $rowUser['email'] ?></td>
                                     <td>
-                                        <a href="?pg=tambah-user&edit=<?php echo $rowUser['id'] ?>" 
-                                            class="btn btn-sm btn-outline-success">Edit</a> |
-                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')" 
-                                            href="?pg=tambah-user&delete=<?php echo $rowUser['id'] ?>" 
-                                            class="btn btn-sm btn-outline-danger">Delete</a>
+                                        <a href="?pg=tambah-user&edit=<?php echo $rowUser['id'] ?>" class="btn btn-sm btn-outline-success">Edit</a> |
+                                        <a onclick="return confirm('apakah anda yakin akan menghapus data ini?')" href="?pg=tambah-user&delete=<?php echo $rowUser['id'] ?>" class="btn btn-sm btn-outline-danger">Delete</a>
                                     </td>
                                 </tr>
                             <?php endwhile ?>

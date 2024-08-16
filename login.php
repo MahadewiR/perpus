@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'confiq/koneksi.php';
+include 'config/koneksi.php';
 
 if (isset($_POST['login'])) {
     $email = $_POST['email'];
